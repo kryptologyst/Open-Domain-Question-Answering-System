@@ -1,0 +1,66 @@
+# Configuration file for Open Domain Question Answering System
+model:
+  # Default model for question answering
+  default_model: "distilbert-base-cased-distilled-squad"
+  
+  # Alternative models for different use cases
+  models:
+    small: "distilbert-base-cased-distilled-squad"
+    medium: "bert-large-cased-whole-word-masking-finetuned-squad"
+    large: "deepset/roberta-base-squad2"
+    multilingual: "deepset/xlm-roberta-base-squad2"
+  
+  # Model parameters
+  max_length: 512
+  stride: 128
+  batch_size: 16
+
+# Data settings
+data:
+  # Synthetic dataset parameters
+  synthetic:
+    num_samples: 1000
+    context_length_range: [100, 500]
+    question_types: ["what", "who", "when", "where", "why", "how"]
+  
+  # Real dataset settings (if available)
+  datasets:
+    squad: "squad"
+    natural_questions: "natural_questions"
+
+# Evaluation metrics
+evaluation:
+  metrics: ["exact_match", "f1", "bleu", "rouge"]
+  test_split: 0.2
+  validation_split: 0.1
+
+# UI settings
+ui:
+  streamlit:
+    title: "Open Domain Question Answering System"
+    description: "Ask questions and get answers from various contexts"
+    sidebar_title: "Configuration"
+  
+  gradio:
+    title: "QA System Demo"
+    description: "Interactive Question Answering"
+
+# Logging configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/qa_system.log"
+
+# Performance settings
+performance:
+  use_gpu: true
+  num_workers: 4
+  cache_dir: "./cache"
+  
+# Advanced features
+features:
+  enable_retrieval: true
+  enable_fine_tuning: false
+  enable_zero_shot: true
+  enable_few_shot: true
+  enable_explainability: true
